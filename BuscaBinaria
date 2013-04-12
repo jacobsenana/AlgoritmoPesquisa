@@ -1,0 +1,79 @@
+package pesquisa_Binaria;
+
+import java.util.Arrays;
+import java.util.Random;
+
+public class BuscaBinaria {
+
+  private int[] data;
+	private int chaave;
+	
+	public final static Random rand = new Random();
+	
+	public BuscaBinaria(int size){
+		
+		data = new int[size];
+		
+		for (int i = 0; i < size; i++) 
+			data[i] = 10+rand.nextInt(90);
+		//verificar depois se o sort eh dentro ou fora do for 
+		Arrays.sort(data); //organiza o array de forma descente
+		
+	}
+	
+	public int BinarySearch(int chaave){
+		int low = 0;
+		int hight = (data.length-1);
+		int middle =(low + hight + 1)/2;
+		
+		int location = -1; //retorno se o elemento não for localizado
+		
+		//loop ate low seja maior que hight
+		do{
+			
+			//imprime elementos remanescentes do array 
+			System.out.println(remainingElements(low,hight));
+			
+			for (int i = 0; i < middle; i++) {
+				System.out.println("  ");
+				System.out.println("*");//indica meio atual
+			}
+			     
+			//chave encontrada no meio do vetor
+			if(chaave == data[middle]){
+				location = middle;
+				//elemento do meio é muito alto
+			}else if(chaave < data[middle]){
+				hight = middle -1;
+				//elemento do meio é muito baixo
+			}else{
+				low = middle +1;
+			}
+			middle = (low + hight + 1)/2; //recalcula elemento do meio
+		}while((low <= hight)&& (location == -1));
+		  
+		return location;
+	}
+
+	private String remainingElements(int low, int hight) {
+		// TODO Auto-generated method stub
+		
+		StringBuilder temporary = new StringBuilder();
+		
+		for (int i = 0; i < low; i++) {
+			temporary.append("   ");
+		}
+		
+		for (int i = 0; i <= hight; i++) 
+			
+			temporary.append(data[i]+" ");
+			temporary.append("\t");
+			
+		return temporary.toString();
+		
+	}
+	
+	public String toString(){
+		return remainingElements(0,data.length -1);
+	}
+}
