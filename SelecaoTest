@@ -1,0 +1,16 @@
+package selecao;
+
+public class Selection_SortTest {
+
+  public static void main(String[] args) {
+		Selection_Sort selec = new Selection_Sort(10);
+		
+		System.out.println("array sem selecao:");
+		System.out.println(selec);
+		
+		selec.sort();
+		
+		System.out.println("array com selecao : ");
+		System.out.println(selec);
+	}
+}
