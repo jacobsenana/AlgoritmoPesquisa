@@ -1,0 +1,37 @@
+package pesquisa_Binaria;
+
+import java.util.Scanner;
+
+public class BuscaBinariaTest {
+
+  public static void main(String[] args) {
+		
+		Scanner scan = new Scanner(System.in);
+		
+		int chave;
+		int posicao;
+		
+		BuscaBinaria busca = new BuscaBinaria(15);
+		System.out.println(busca);
+
+		System.out.println("entre com um valor inteiro ");
+		chave = scan.nextInt();
+		System.out.println();
+		
+		
+		while(chave != -1){
+			
+			posicao = busca.BinarySearch(chave);
+			
+			if(posicao == -1)
+				System.out.println("posicao n encontrada");
+			else
+				System.out.println("o inteiro "+chave+" foi encontrado na posicao "+posicao);
+			
+			System.out.println("digite um outro numero inteiro ou -1 para sair");
+			
+			chave = scan.nextInt();
+		}
+			
+	}
+}
