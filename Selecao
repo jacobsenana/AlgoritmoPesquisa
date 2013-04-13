@@ -1,0 +1,67 @@
+package selecao;
+
+import java.util.Arrays;
+import java.util.Random;
+
+public class Selection_Sort {
+
+  private int[] data;
+	private static final Random gerador = new Random();
+	
+	
+	//cria um array e preenche com numeros aleatorios
+	public Selection_Sort(int size){
+		
+		data = new int[size];
+		
+		for (int i = 0; i < data.length; i++) {
+			data[i] = 10+gerador.nextInt(90);
+		}
+	}
+	//classifica o array por selecao
+	public void sort(){
+		int smallest; //indice do menor elemento
+		
+		for (int i = 0; i < data.length; i++) {
+			smallest = i;
+			
+			for (int index = i+1; index < data.length; index++) {
+				
+				if(data[index]<data[smallest])
+					smallest = index;
+			}
+			swap(i,smallest);//coloca o proximo elemento em smallest
+			
+			printPass(i +1,smallest);
+		}
+	}
+	private void printPass(int pass, int index) {
+		// TODO Auto-generated method stub
+		System.out.println(String.format("after pass %2d :", pass));
+		
+		for (int i = 0; i < index; i++) 
+			System.out.print(data[i]+" ");
+			System.out.print(data[index]+"* ");
+		
+		for (int i = index; i < data.length; i++) 
+			System.out.println(data[i]+" ");
+			System.out.println("\n       ");
+		
+		for(int j=0;j<pass;j++)
+			System.out.println("--  ");
+			System.out.println("\n");
+			
+	}
+	private void swap(int primeiro, int segundo) {
+		// TODO Auto-generated method stub
+		int temporary = data[primeiro];
+		data[primeiro]= data[segundo];
+		data[segundo]= temporary;
+	}
+	
+	public String toString(){
+		return Arrays.toString(data);
+	}
+	
+	
+}
