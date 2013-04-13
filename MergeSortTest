@@ -1,0 +1,14 @@
+package intercalacao;
+
+public class Merge_Sort_Recursivo_Test {
+
+  public static void main(String[] args) {
+		Merge_Sort_Recursivo merge = new Merge_Sort_Recursivo(10);
+		
+		System.out.println("unsorted :"+merge+"\n");
+		merge.sort();
+		
+		System.out.println("com merge"+merge+"\n");
+		
+	}
+}
