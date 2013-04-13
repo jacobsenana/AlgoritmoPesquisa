@@ -1,0 +1,101 @@
+package intercalacao;
+
+import java.util.Random;
+
+public class Merge_Sort_Recursivo {
+
+  private int[] data;
+	private static final Random rand = new Random();
+	
+	//contrutor que cria o array e coloca numeros aleatorios
+	public Merge_Sort_Recursivo(int size){
+		
+		data = new int[size];
+		for (int i = 0; i < size; i++) {
+			data[i]=10+rand.nextInt(90);
+		}
+	}
+	
+	//chama o metodo split recursivo para iniciar a classificação por intercalação
+	public void sort(){
+		sortArray(0,data.length-1);//divide o array inteiro
+		
+	}
+
+	private void sortArray(int low, int high) {
+		// TODO Auto-generated method stub
+		//caso basico, testa se array tem tamanho 1 
+		if((high - low)>= 1){
+			int middle1=(low+high)/2;
+			int middle2=middle1+1;
+			
+			//gera saida do passo de divisao
+			System.out.println("Split   "+subarray(low,high));
+			System.out.println("        "+subarray(low, middle1));
+			System.out.println("        "+subarray(middle2, high));
+			
+			//recursividade
+			sortArray(low, middle1);
+			sortArray(middle2, high);
+			
+			//intercala dois arrays classificando depois que as chamadas de divisao retornam 
+			
+			merge(low,middle1,middle2,high);
+		}
+		
+	}
+
+	private void merge(int left,int middle1,int middle2,int right) {
+		// TODO Auto-generated method stub
+		int leftIndex = left;//indice do subarray esquerdo
+		int rightIndex = middle2;//indice do subarray direito
+		int combinedIndex = left;//indice temporario
+		int[] combined = new int[data.length];//array funcional
+		
+		//saida de dois subarrays antes de mesclar
+		System.out.println("merge   :"+subarray(left, middle1));
+		System.out.println("         "+subarray(middle2, right));
+		
+		
+		//intercala os arras ate alcançar o fim de um deles
+		
+		while(leftIndex <= middle1 && rightIndex <= right){
+			//coloca o menor dos dosi elementos atuais no resultado
+			//move para o proximo espaço nos arrays
+			if(data[leftIndex]<= data[rightIndex])
+				combined[combinedIndex++] = data[leftIndex++];
+			else
+				combined[combinedIndex++] = data[rightIndex++];
+		}
+		//se o array esq estiver vazio
+		if(leftIndex == middle2)
+			//copia o restante do array direito
+			while(rightIndex <= right)
+				combined[combinedIndex++] = data[rightIndex++];
+		else //o array direito esta vazio, copia o restante do array esq
+			while(leftIndex <= middle1)
+					combined[combinedIndex++] = data[leftIndex++];
+		for (int i = left; i <= right; i++) 
+			data[i] = combined[i];
+		//array intercalado
+		System.out.println("        "+subarray(left, right));
+		System.out.println();
+	}
+
+	private String subarray(int low, int high) {
+		// TODO Auto-generated method stub
+		
+		StringBuilder temporary = new StringBuilder();
+		for (int i = 0; i < low; i++) 
+			temporary.append("    ");
+		for (int i = low; i <= high; i++) 
+			temporary.append(" "+data[i]);
+		return temporary.toString();	
+		
+	}
+	
+	public String toString(){
+		
+		return subarray(0, data.length-1);
+	}
+}
