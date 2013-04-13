@@ -1,0 +1,35 @@
+package pesquisa_Linear;
+
+import java.util.Scanner;
+
+public class BuscaLinearTest {
+
+  public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		
+		int chaveInt;
+		int posicao;//localizacao da chave
+		
+		//instancia a busca
+		BuscaLinear busca = new BuscaLinear();
+		
+		System.out.println("digite o tamanho do array");
+		busca.LinearArray(scan.nextInt());
+		
+		System.out.println("por favor entre com a chave de procura ou -1 para sair");
+		chaveInt = scan.nextInt();
+		
+		while(chaveInt != -1){
+			
+			posicao = busca.buscaLinear(chaveInt);
+			
+			if(posicao == -1){
+				System.out.println("numero encontrado "+posicao);
+			}else{
+				System.out.println("O inteiro "+chaveInt+" foi encontrado na posicao "+posicao);
+			}
+			System.out.println("entre com outro valor ou -1 para sair");
+			chaveInt = scan.nextInt();
+		}
+	}
+}
